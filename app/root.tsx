@@ -9,6 +9,7 @@ import {
 } from "@remix-run/react";
 import * as React from "react";
 import styles from "./tailwind.css";
+import "focus-visible";
 
 export const meta: MetaFunction = () => ({
   charset: "utf-8",

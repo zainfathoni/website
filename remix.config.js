@@ -8,6 +8,7 @@ module.exports = {
   */
   devServerBroadcastDelay: 300,
   future: {
+    unstable_postcss: true,
     unstable_tailwind: true,
   },
   ignoredRouteFiles: ["**/.*"],
