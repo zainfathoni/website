@@ -28,9 +28,15 @@ jobs:
       - name: 💿 Remix Build
         run: npm run build
 
+      - name: 📂 Make deno dir
+        run: mkdir -p ./deno
+
+      - name: 📝 Copy Remix build files into output dir
+        run: cp -R ./{build,public} ./deno
+
       - name: 🚛 Deploy to Deno Deploy
         uses: denoland/deployctl@v1
         with:
           project: zainfathoni # the name of the project on Deno Deploy
-          entrypoint: 'index.js' # the entrypoint to deploy
-          root: 'build' # the root directory of the build assets
+          entrypoint: './build/index.js' # the entrypoint to deploy
+          root: './deno' # the root directory of the build assets
