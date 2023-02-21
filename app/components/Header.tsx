@@ -351,12 +351,16 @@ export function Header() {
       isInitial.current = false;
     }
 
+    const opts: AddEventListenerOptions & EventListenerOptions = {
+      passive: true,
+    };
+
     updateStyles();
-    self.addEventListener("scroll", updateStyles, { passive: true });
+    self.addEventListener("scroll", updateStyles, opts);
     self.addEventListener("resize", updateStyles);
 
     return () => {
-      self.removeEventListener("scroll", updateStyles, { passive: true });
+      self.removeEventListener("scroll", updateStyles, opts);
       self.removeEventListener("resize", updateStyles);
     };
   }, [isHomePage]);
