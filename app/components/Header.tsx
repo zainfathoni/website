@@ -261,8 +261,8 @@ function Avatar({
 export function Header() {
   const isHomePage = true; // TODO: use `useMatches` from react-router-dom
 
-  const headerRef = useRef();
-  const avatarRef = useRef();
+  const headerRef = useRef<HTMLDivElement>(null);
+  const avatarRef = useRef<HTMLDivElement>(null);
   const isInitial = useRef(true);
 
   useEffect(() => {
@@ -278,7 +278,10 @@ export function Header() {
     }
 
     function updateHeaderStyles() {
-      const { top, height } = headerRef.current.getBoundingClientRect();
+      const { top, height } = headerRef.current?.getBoundingClientRect() ?? {
+        top: 0,
+        height: 0,
+      };
       const scrollY = clamp(
         self.scrollY,
         0,
