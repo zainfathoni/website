@@ -1,4 +1,8 @@
 {
   "deno.enable": true,
-  "deno.lint": true
+  "deno.lint": true,
+  "yaml.schemas": {
+    "file:///Users/zainfathoni/.vscode/extensions/atlassian.atlascode-2.9.1/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml",
+    "https://json.schemastore.org/github-workflow.json": "file:///Users/zainfathoni/Code/GitHub/zainfathoni/website/.github/workflows/deploy.yml"
+  }
 }
