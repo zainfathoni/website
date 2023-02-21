@@ -261,8 +261,8 @@ function Avatar({
 export function Header() {
   const isHomePage = true; // TODO: use `useMatches` from react-router-dom
 
-  const headerRef = useRef();
-  const avatarRef = useRef();
+  const headerRef = useRef<HTMLDivElement>(null);
+  const avatarRef = useRef<HTMLDivElement>(null);
   const isInitial = useRef(true);
 
   useEffect(() => {
@@ -278,7 +278,10 @@ export function Header() {
     }
 
     function updateHeaderStyles() {
-      const { top, height } = headerRef.current.getBoundingClientRect();
+      const { top, height } = headerRef.current?.getBoundingClientRect() ?? {
+        top: 0,
+        height: 0,
+      };
       const scrollY = clamp(
         self.scrollY,
         0,
@@ -351,12 +354,16 @@ export function Header() {
       isInitial.current = false;
     }
 
+    const opts: AddEventListenerOptions & EventListenerOptions = {
+      passive: true,
+    };
+
     updateStyles();
-    self.addEventListener("scroll", updateStyles, { passive: true });
+    self.addEventListener("scroll", updateStyles, opts);
     self.addEventListener("resize", updateStyles);
 
     return () => {
-      self.removeEventListener("scroll", updateStyles, { passive: true });
+      self.removeEventListener("scroll", updateStyles, opts);
       self.removeEventListener("resize", updateStyles);
     };
   }, [isHomePage]);
@@ -382,7 +389,11 @@ export function Header() {
             >
               <div
                 className="top-[var(--avatar-top,theme(spacing.3))] w-full"
-                style={{ position: "var(--header-inner-position)" }}
+                style={
+                  {
+                    position: "var(--header-inner-position)",
+                  } as unknown as React.CSSProperties
+                }
               >
                 <div className="relative">
                   <AvatarContainer
@@ -405,7 +416,11 @@ export function Header() {
         <div
           ref={headerRef}
           className="top-0 z-10 h-16 pt-6"
-          style={{ position: "var(--header-position)" }}
+          style={
+            {
+              position: "var(--header-position)",
+            } as unknown as React.CSSProperties
+          }
         >
           <Container
             className="top-[var(--header-top,theme(spacing.6))] w-full"

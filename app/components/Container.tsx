@@ -11,10 +11,12 @@ type ContainerInternal = React.ForwardRefExoticComponent<
   ContainerProps & React.RefAttributes<HTMLDivElement>
 >;
 
-type ContainerType = ContainerInternal & {
-  Outer?: ContainerInternal;
-  Inner?: ContainerInternal;
+type ContainerCompoundComponents = {
+  Outer: ContainerInternal;
+  Inner: ContainerInternal;
 };
+
+type ContainerType = ContainerInternal & ContainerCompoundComponents;
 
 const OuterContainer: ContainerInternal = forwardRef<
   HTMLDivElement,
@@ -42,16 +44,19 @@ const InnerContainer: ContainerInternal = forwardRef<
   );
 });
 
-export const Container: ContainerType = forwardRef<
-  HTMLDivElement,
-  ContainerProps
->(function Container({ children, ...props }, ref) {
-  return (
-    <OuterContainer ref={ref} {...props}>
-      <InnerContainer>{children}</InnerContainer>
-    </OuterContainer>
-  );
-});
-
-Container.Outer = OuterContainer;
-Container.Inner = InnerContainer;
+export const Container: ContainerType = Object.assign<
+  ContainerInternal,
+  ContainerCompoundComponents
+>(
+  forwardRef<HTMLDivElement, ContainerProps>(function Container(
+    { children, ...props },
+    ref
+  ) {
+    return (
+      <OuterContainer ref={ref} {...props}>
+        <InnerContainer>{children}</InnerContainer>
+      </OuterContainer>
+    );
+  }),
+  { Outer: OuterContainer, Inner: InnerContainer }
+);
