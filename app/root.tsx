@@ -21,12 +21,12 @@ export const links: LinksFunction = () => [{ rel: "stylesheet", href: styles }];
 
 export default function App() {
   return (
-    <html lang="en">
+    <html className="h-full antialiased" lang="en">
       <head>
         <Meta />
         <Links />
       </head>
-      <body>
+      <body className="flex h-full flex-col bg-zinc-50 dark:bg-black">
         <Outlet />
         <ScrollRestoration />
         <Scripts />

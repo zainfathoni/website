@@ -13,8 +13,10 @@
     "typecheck": "deno check"
   },
   "dependencies": {
+    "@headlessui/react": "1.7.11",
     "@remix-run/deno": "^1.13.0",
     "@remix-run/react": "^1.13.0",
+    "clsx": "1.2.1",
     "focus-visible": "5.2.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
