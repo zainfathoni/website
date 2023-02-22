@@ -50,7 +50,7 @@ export const Container: ContainerType = Object.assign<
 >(
   forwardRef<HTMLDivElement, ContainerProps>(function Container(
     { children, ...props },
-    ref
+    ref,
   ) {
     return (
       <OuterContainer ref={ref} {...props}>
@@ -58,5 +58,5 @@ export const Container: ContainerType = Object.assign<
       </OuterContainer>
     );
   }),
-  { Outer: OuterContainer, Inner: InnerContainer }
+  { Outer: OuterContainer, Inner: InnerContainer },
 );

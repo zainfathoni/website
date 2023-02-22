@@ -1,4 +1,16 @@
 {
   "extends": "./node_modules/pkode/base-tsconfig.json",
-  "include": ["remix.env.d.ts", "app/**/*.ts", "app/**/*.tsx"]
+  "include": ["remix.env.d.ts", "app/**/*.ts", "app/**/*.tsx"],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "allowJs": true,
+    "forceConsistentCasingInFileNames": true,
+    "lib": ["DOM", "DOM.Iterable", "ES2019"],
+    "strict": true,
+    "target": "ES2019",
+    "isolatedModules": true,
+    "jsx": "react-jsx",
+    "noEmit": true,
+    "moduleResolution": "node"
+  }
 }

@@ -1,8 +1,13 @@
-import * as React from "react";
 import { Link } from "@remix-run/react";
 import { Container } from "./Container";
 
-function NavLink({ href, children }) {
+function NavLink({
+  href,
+  children,
+}: {
+  href: string;
+  children: React.ReactNode;
+}) {
   return (
     <Link
       to={href}
@@ -27,8 +32,8 @@ export function Footer() {
                 <NavLink href="/uses">Uses</NavLink>
               </div>
               <p className="text-sm text-zinc-400 dark:text-zinc-500">
-                &copy; {new Date().getFullYear()} Zain Fathoni. All rights
-                reserved.
+                &copy; {new Date().getFullYear()}{" "}
+                Zain Fathoni. All rights reserved.
               </p>
             </div>
           </Container.Inner>
