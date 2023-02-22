@@ -9,10 +9,12 @@ import {
 } from "@remix-run/react";
 import styles from "./tailwind.css";
 import "focus-visible";
+import { metadata } from "./models/metadata";
 
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
-  title: "New Remix App",
+  title: metadata.title,
+  description: metadata.description,
   viewport: "width=device-width,initial-scale=1",
 });
 
