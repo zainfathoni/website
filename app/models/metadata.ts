@@ -1,4 +1,4 @@
-import data from "../data/metadata.json";
+import data from "../data/metadata.json" assert { type: "json" };
 
 export type Metadata = {
   title: string;

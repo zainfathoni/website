@@ -10,7 +10,7 @@
     "format": "deno fmt --ignore=node_modules,build,public/build",
     "lint": "deno lint --ignore=node_modules,build,public/build",
     "start": "cross-env NODE_ENV=production deno run --unstable --allow-net --allow-read --allow-env ./build/index.js",
-    "typecheck": "deno check"
+    "typecheck": "deno check app/**/*.ts{,x}"
   },
   "dependencies": {
     "@headlessui/react": "1.7.11",

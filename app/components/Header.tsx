@@ -1,7 +1,7 @@
 import { Popover, Transition } from "@headlessui/react";
 import clsx from "clsx";
 
-import avatarImage from "../images/avatar.jpg";
+import avatarImage from "../images/avatar.jpg" assert { type: "asset" };
 import React, { Fragment, useEffect, useRef } from "react";
 import { Link, NavLink } from "@remix-run/react";
 import { Container, ContainerProps } from "./Container";
@@ -164,7 +164,8 @@ function NavItem({
             isActive
               ? "text-teal-500 dark:text-teal-400"
               : "hover:text-teal-500 dark:hover:text-teal-400",
-          )}
+          )
+        }
       >
         {({ isActive }) => (
           <>
@@ -180,10 +181,9 @@ function NavItem({
 }
 
 function DesktopNavigation(
-  props:
-    & JSX.IntrinsicAttributes
-    & React.ClassAttributes<HTMLElement>
-    & React.HTMLAttributes<HTMLElement>,
+  props: JSX.IntrinsicAttributes &
+    React.ClassAttributes<HTMLElement> &
+    React.HTMLAttributes<HTMLElement>,
 ) {
   return (
     <nav {...props}>
@@ -360,8 +360,7 @@ export function Header() {
 
       const borderScale = 1 / (toScale / scale);
       const borderX = (-toX + x) * borderScale;
-      const borderTransform =
-        `translate3d(${borderX}rem, 0, 0) scale(${borderScale})`;
+      const borderTransform = `translate3d(${borderX}rem, 0, 0) scale(${borderScale})`;
 
       setProperty("--avatar-border-transform", borderTransform);
       setProperty("--avatar-border-opacity", scale === toScale ? "1" : "0");
@@ -408,9 +407,11 @@ export function Header() {
             >
               <div
                 className="top-[var(--avatar-top,theme(spacing.3))] w-full"
-                style={{
-                  position: "var(--header-inner-position)",
-                } as unknown as React.CSSProperties}
+                style={
+                  {
+                    position: "var(--header-inner-position)",
+                  } as unknown as React.CSSProperties
+                }
               >
                 <div className="relative">
                   <AvatarContainer
@@ -433,9 +434,11 @@ export function Header() {
         <div
           ref={headerRef}
           className="top-0 z-10 h-16 pt-6"
-          style={{
-            position: "var(--header-position)",
-          } as unknown as React.CSSProperties}
+          style={
+            {
+              position: "var(--header-position)",
+            } as unknown as React.CSSProperties
+          }
         >
           <Container
             className="top-[var(--header-top,theme(spacing.6))] w-full"
