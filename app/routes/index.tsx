@@ -20,6 +20,11 @@ import {
 import { metadata } from "app/models/metadata";
 import clsx from "clsx";
 import { ButtonLink } from "app/components/Button";
+import { formatDate } from "app/lib/format-date";
+import { Card } from "app/components/Card";
+import * as reactDomJsx from "../articles/react-dom-jsx.mdx";
+import { json } from "@remix-run/deno";
+import { useLoaderData } from "@remix-run/react";
 
 function SocialLink({
   icon: Icon,
@@ -75,6 +80,54 @@ function Photos() {
         ))}
       </div>
     </div>
+  );
+}
+
+function articleFromModule(mod: {
+  filename: string;
+  attributes: {
+    meta: {
+      title: string;
+      author: string;
+      description: string;
+      date: Date;
+    };
+  };
+}) {
+  return {
+    slug: mod.filename.replace(/\.mdx?$/, ""),
+    ...mod.attributes.meta,
+  };
+}
+
+export function loader() {
+  // Return metadata about each of the posts for display on the index page.
+  // Referencing the posts here instead of in the Index component down below
+  // lets us avoid bundling the actual posts themselves in the bundle for the
+  // index page.
+  return json([articleFromModule(reactDomJsx)]);
+}
+
+function Article({
+  article,
+}: {
+  article: {
+    slug: string;
+    title: string;
+    author: string;
+    description: string;
+    date: string;
+  };
+}) {
+  return (
+    <Card as="article">
+      <Card.Title to={`/articles/${article.slug}`}>{article.title}</Card.Title>
+      <Card.Eyebrow as="time" dateTime={article.date} decorate>
+        {formatDate(article.date)}
+      </Card.Eyebrow>
+      <Card.Description>{article.description}</Card.Description>
+      <Card.Cta>Read article</Card.Cta>
+    </Card>
   );
 }
 
@@ -197,6 +250,8 @@ function Resume() {
   );
 }
 export default function Index() {
+  const articles = useLoaderData<typeof loader>();
+
   return (
     <>
       <Container className="mt-9">
@@ -235,9 +290,9 @@ export default function Index() {
       <Container className="mt-24 md:mt-28">
         <div className="mx-auto grid max-w-xl grid-cols-1 gap-y-20 lg:max-w-none lg:grid-cols-2">
           <div className="flex flex-col gap-16">
-            {/* {articles.map((article) => (
+            {articles.map((article) => (
               <Article key={article.slug} article={article} />
-            ))} */}
+            ))}
           </div>
           <div className="space-y-10 lg:pl-16 xl:pl-24">
             {/* <Newsletter /> */}
