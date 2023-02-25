@@ -40,7 +40,7 @@ function SocialLink({
 }
 
 function Photos() {
-  let rotations = [
+  const rotations = [
     "rotate-2",
     "-rotate-2",
     "rotate-2",
@@ -92,7 +92,7 @@ type ResumeType = {
 };
 
 function Resume() {
-  let resume: ResumeType[] = [
+  const resume: ResumeType[] = [
     {
       company: "Ninja Van",
       title: "Senior Software Engineer",
