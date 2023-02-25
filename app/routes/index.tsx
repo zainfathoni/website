@@ -16,7 +16,7 @@ import {
   InstagramIcon,
   LinkedInIcon,
   TwitterIcon,
-} from "app/components/SocialIcons";
+} from "app/components/Icons";
 import { metadata } from "app/models/metadata";
 import clsx from "clsx";
 import { ButtonLink } from "app/components/Button";

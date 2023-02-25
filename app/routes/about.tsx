@@ -9,7 +9,7 @@ import {
   GitHubIcon,
   LinkedInIcon,
   Icon,
-} from "../components/SocialIcons";
+} from "../components/Icons";
 import portraitImage from "../images/portrait.jpg";
 import { metadata } from "../models/metadata";
 
