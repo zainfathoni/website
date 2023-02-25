@@ -4,7 +4,13 @@ import jsconfAsia2019 from "app/images/photos/jsconf-asia-2019.jpg";
 import webUnconf2019 from "app/images/photos/web-unconf-2019.jpg";
 import ddc2023 from "app/images/photos/ddc-2023.jpg";
 import pianoWithWife from "app/images/photos/piano-with-wife.jpg";
+import ninjavanLogo from "app/images/logos/ninjavan.png";
+import bukalapakLogo from "app/images/logos/bukalapak.png";
+import xtremaxLogo from "app/images/logos/xtremax.jpg";
+import pejuangKodeLogo from "app/images/logos/pejuang-kode.svg";
 import {
+  ArrowDownIcon,
+  BriefcaseIcon,
   GitHubIcon,
   Icon,
   InstagramIcon,
@@ -13,6 +19,7 @@ import {
 } from "app/components/SocialIcons";
 import { metadata } from "app/models/metadata";
 import clsx from "clsx";
+import { ButtonLink } from "app/components/Button";
 
 function SocialLink({
   icon: Icon,
@@ -71,6 +78,120 @@ function Photos() {
   );
 }
 
+type ResumeTimeLabel = {
+  label: string;
+  dateTime: string;
+};
+
+type ResumeType = {
+  company: string;
+  title: string;
+  logo: string;
+  start: string | ResumeTimeLabel;
+  end: string | ResumeTimeLabel;
+};
+
+function Resume() {
+  let resume: ResumeType[] = [
+    {
+      company: "Ninja Van",
+      title: "Senior Software Engineer",
+      logo: ninjavanLogo,
+      start: "2018",
+      end: {
+        label: "Present",
+        dateTime: new Date().getFullYear().toString(),
+      },
+    },
+    {
+      company: "Bukalapak",
+      title: "Software Engineer",
+      logo: bukalapakLogo,
+      start: "2017",
+      end: "2018",
+    },
+    {
+      company: "Xtremax",
+      title: "Software Development Manager",
+      logo: xtremaxLogo,
+      start: "2015",
+      end: "2017",
+    },
+    {
+      company: "Qiwary Usaha Nusantara",
+      title: "Programmer",
+      logo: pejuangKodeLogo,
+      start: "2014",
+      end: "2014",
+    },
+  ];
+
+  return (
+    <div className="rounded-2xl border border-zinc-100 p-6 dark:border-zinc-700/40">
+      <h2 className="flex text-sm font-semibold text-zinc-900 dark:text-zinc-100">
+        <BriefcaseIcon className="h-6 w-6 flex-none" />
+        <span className="ml-3">Work</span>
+      </h2>
+      <ol className="mt-6 space-y-4">
+        {resume.map((role, roleIndex) => (
+          <li key={roleIndex} className="flex gap-4">
+            <div className="relative mt-1 flex h-10 w-10 flex-none items-center justify-center rounded-full shadow-md shadow-zinc-800/5 ring-1 ring-zinc-900/5 dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0">
+              <img src={role.logo} alt="" className="h-7 w-7" />
+            </div>
+            <dl className="flex flex-auto flex-wrap gap-x-2">
+              <dt className="sr-only">Company</dt>
+              <dd className="w-full flex-none text-sm font-medium text-zinc-900 dark:text-zinc-100">
+                {role.company}
+              </dd>
+              <dt className="sr-only">Role</dt>
+              <dd className="text-xs text-zinc-500 dark:text-zinc-400">
+                {role.title}
+              </dd>
+              <dt className="sr-only">Date</dt>
+              <dd
+                className="ml-auto text-xs text-zinc-400 dark:text-zinc-500"
+                aria-label={`${
+                  typeof role.start === "string" ? role.start : role.start.label
+                } until ${
+                  typeof role.end === "string" ? role.end : role.end.label
+                }`}
+              >
+                <time
+                  dateTime={
+                    typeof role.start === "string"
+                      ? role.start
+                      : role.start.dateTime
+                  }
+                >
+                  {typeof role.start === "string"
+                    ? role.start
+                    : role.start.label}
+                </time>{" "}
+                <span aria-hidden="true">—</span>{" "}
+                <time
+                  dateTime={
+                    typeof role.end === "string" ? role.end : role.end.dateTime
+                  }
+                >
+                  {typeof role.end === "string" ? role.end : role.end.label}
+                </time>
+              </dd>
+            </dl>
+          </li>
+        ))}
+      </ol>
+      <ButtonLink
+        href="/zain-fathoni-cv.pdf"
+        download="Zain Fathoni CV.pdf"
+        variant="secondary"
+        className="group mt-6 w-full"
+      >
+        Download CV
+        <ArrowDownIcon className="h-4 w-4 stroke-zinc-400 transition group-active:stroke-zinc-600 dark:group-hover:stroke-zinc-50 dark:group-active:stroke-zinc-50" />
+      </ButtonLink>
+    </div>
+  );
+}
 export default function Index() {
   return (
     <>
@@ -107,6 +228,19 @@ export default function Index() {
         </div>
       </Container>
       <Photos />
+      <Container className="mt-24 md:mt-28">
+        <div className="mx-auto grid max-w-xl grid-cols-1 gap-y-20 lg:max-w-none lg:grid-cols-2">
+          <div className="flex flex-col gap-16">
+            {/* {articles.map((article) => (
+              <Article key={article.slug} article={article} />
+            ))} */}
+          </div>
+          <div className="space-y-10 lg:pl-16 xl:pl-24">
+            {/* <Newsletter /> */}
+            <Resume />
+          </div>
+        </div>
+      </Container>
     </>
   );
 }
