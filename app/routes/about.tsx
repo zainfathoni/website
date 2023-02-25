@@ -8,6 +8,7 @@ import {
   InstagramIcon,
   GitHubIcon,
   LinkedInIcon,
+  Icon,
 } from "../components/SocialIcons";
 import portraitImage from "../images/portrait.jpg";
 import { metadata } from "../models/metadata";
@@ -20,9 +21,7 @@ function SocialLink({
 }: {
   className?: string;
   href: string;
-  icon: (
-    props: JSX.IntrinsicAttributes & React.SVGProps<SVGSVGElement>,
-  ) => JSX.Element;
+  icon: Icon;
   children: React.ReactNode;
 }) {
   return (

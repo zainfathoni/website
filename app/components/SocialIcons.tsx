@@ -1,3 +1,7 @@
+export type Icon = (
+  props: JSX.IntrinsicAttributes & React.SVGProps<SVGSVGElement>,
+) => JSX.Element;
+
 export function TwitterIcon(
   props: JSX.IntrinsicAttributes & React.SVGProps<SVGSVGElement>,
 ) {
