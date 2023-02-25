@@ -3,7 +3,7 @@ import clsx from "clsx";
 
 import avatarImage from "../images/avatar.jpg" assert { type: "asset" };
 import React, { Fragment, useEffect, useRef } from "react";
-import { Link, NavLink } from "@remix-run/react";
+import { Link, NavLink, useMatches } from "@remix-run/react";
 import { Container, ContainerProps } from "./Container";
 
 function CloseIcon(
@@ -277,7 +277,9 @@ function Avatar({
 }
 
 export function Header() {
-  const isHomePage = true; // TODO: use `useMatches` from react-router-dom
+  const matches = useMatches();
+
+  const isHomePage = matches[1].pathname === "/";
 
   const headerRef = useRef<HTMLDivElement>(null);
   const avatarRef = useRef<HTMLDivElement>(null);
