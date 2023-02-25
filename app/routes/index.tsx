@@ -4,9 +4,9 @@ import jsconfAsia2019 from "app/images/photos/jsconf-asia-2019.jpg";
 import webUnconf2019 from "app/images/photos/web-unconf-2019.jpg";
 import ddc2023 from "app/images/photos/ddc-2023.jpg";
 import pianoWithWife from "app/images/photos/piano-with-wife.jpg";
-import ninjavanLogo from "app/images/logos/ninjavan.png";
+import ninjavanLogo from "app/images/logos/ninjavan.svg";
 import bukalapakLogo from "app/images/logos/bukalapak.png";
-import xtremaxLogo from "app/images/logos/xtremax.jpg";
+import xtremaxLogo from "app/images/logos/xtremax.png";
 import pejuangKodeLogo from "app/images/logos/pejuang-kode.svg";
 import {
   ArrowDownIcon,
@@ -136,7 +136,11 @@ function Resume() {
         {resume.map((role, roleIndex) => (
           <li key={roleIndex} className="flex gap-4">
             <div className="relative mt-1 flex h-10 w-10 flex-none items-center justify-center rounded-full shadow-md shadow-zinc-800/5 ring-1 ring-zinc-900/5 dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0">
-              <img src={role.logo} alt="" className="h-7 w-7" />
+              <img
+                src={role.logo}
+                alt={role.company}
+                className="h-9 w-9 rounded-full"
+              />
             </div>
             <dl className="flex flex-auto flex-wrap gap-x-2">
               <dt className="sr-only">Company</dt>
