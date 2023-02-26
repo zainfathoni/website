@@ -1,14 +1,18 @@
-import * as reactDomJsx from "../routes/articles/react-dom-jsx.mdx";
+import * as reactDomJsx from "../content/articles/react-dom-jsx.mdx";
 
 export type ArticleAttributes = {
-  title: string;
-  author: string;
-  description: string;
-  date: string;
   slug: string;
+  attributes: {
+    meta: {
+      author: string;
+      description: string;
+      date: string;
+      title: string;
+    };
+  };
 };
 
-function articleFromModule(mod: {
+function articleFromModule(module: {
   filename: string;
   attributes: {
     meta: {
@@ -20,8 +24,8 @@ function articleFromModule(mod: {
   };
 }): ArticleAttributes {
   return {
-    slug: mod.filename.replace(/\.mdx?$/, ""),
-    ...mod.attributes.meta,
+    slug: module.filename.replace(/\.mdx?$/, ""),
+    ...module,
   };
 }
 

@@ -11,30 +11,35 @@ export const meta: MetaFunction = () => ({
     "All of my long-form thoughts on programming, career, family, and more, collected in chronological order.",
 });
 
-function Article({ article }: { article: ArticleAttributes }) {
+function Article({
+  article: {
+    slug,
+    attributes: { meta },
+  },
+}: {
+  article: ArticleAttributes;
+}) {
   return (
     <article className="md:grid md:grid-cols-4 md:items-baseline">
       <Card className="md:col-span-3">
-        <Card.Title to={`/articles/${article.slug}`}>
-          {article.title}
-        </Card.Title>
+        <Card.Title to={`/articles/${slug}`}>{meta.title}</Card.Title>
         <Card.Eyebrow
           as="time"
-          dateTime={article.date}
+          dateTime={meta.date}
           className="md:hidden"
           decorate
         >
-          {formatDate(article.date)}
+          {formatDate(meta.date)}
         </Card.Eyebrow>
-        <Card.Description>{article.description}</Card.Description>
+        <Card.Description>{meta.description}</Card.Description>
         <Card.Cta>Read article</Card.Cta>
       </Card>
       <Card.Eyebrow
         as="time"
-        dateTime={article.date}
+        dateTime={meta.date}
         className="mt-1 hidden md:block"
       >
-        {formatDate(article.date)}
+        {formatDate(meta.date)}
       </Card.Eyebrow>
     </article>
   );
@@ -55,13 +60,13 @@ export default function ArticlesIndex() {
       title="Writing on web development, career, and family."
       intro="All of my long-form thoughts on programming, career, family, and more, collected in chronological order."
     >
-      <div className="md:border-l md:border-zinc-100 md:pl-6 md:dark:border-zinc-700/40">
+      <section className="md:border-l md:border-zinc-100 md:pl-6 md:dark:border-zinc-700/40">
         <div className="flex max-w-3xl flex-col space-y-16">
           {articles.map((article) => (
             <Article key={article.slug} article={article} />
           ))}
         </div>
-      </div>
+      </section>
     </SimpleLayout>
   );
 }
