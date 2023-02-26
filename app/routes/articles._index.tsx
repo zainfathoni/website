@@ -2,7 +2,7 @@ import { json, MetaFunction } from "@remix-run/deno";
 import { Outlet, useLoaderData } from "@remix-run/react";
 import { Card } from "app/components/Card";
 import { SimpleLayout } from "app/components/SimpleLayout";
-import { formatDate } from "app/lib/format-date";
+import { formatDate } from "app/utils/format-date";
 import { ArticleAttributes, getAllArticles } from "app/models/articles";
 
 export const meta: MetaFunction = () => ({

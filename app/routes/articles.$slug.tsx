@@ -3,7 +3,7 @@ import { json } from "@remix-run/deno";
 import { Link, useLoaderData } from "@remix-run/react";
 import { ArrowLeftIcon } from "app/components/Icons";
 import { Prose } from "app/components/Prose";
-import { formatDate } from "app/lib/format-date";
+import { formatDate } from "app/utils/format-date";
 import { getArticleBySlug } from "app/models/articles";
 
 export function loader({ params }: LoaderArgs) {

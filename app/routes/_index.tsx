@@ -20,7 +20,7 @@ import {
 import { metadata } from "app/models/metadata";
 import clsx from "clsx";
 import { ButtonLink } from "app/components/Button";
-import { formatDate } from "app/lib/format-date";
+import { formatDate } from "app/utils/format-date";
 import { Card } from "app/components/Card";
 import { json } from "@remix-run/deno";
 import { useLoaderData } from "@remix-run/react";
