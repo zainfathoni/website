@@ -22,9 +22,9 @@ import clsx from "clsx";
 import { ButtonLink } from "app/components/Button";
 import { formatDate } from "app/lib/format-date";
 import { Card } from "app/components/Card";
-import * as reactDomJsx from "../articles/react-dom-jsx.mdx";
 import { json } from "@remix-run/deno";
 import { useLoaderData } from "@remix-run/react";
+import { getAllArticles } from "app/models/articles";
 
 function SocialLink({
   icon: Icon,
@@ -83,29 +83,12 @@ function Photos() {
   );
 }
 
-function articleFromModule(mod: {
-  filename: string;
-  attributes: {
-    meta: {
-      title: string;
-      author: string;
-      description: string;
-      date: Date;
-    };
-  };
-}) {
-  return {
-    slug: mod.filename.replace(/\.mdx?$/, ""),
-    ...mod.attributes.meta,
-  };
-}
-
 export function loader() {
   // Return metadata about each of the posts for display on the index page.
   // Referencing the posts here instead of in the Index component down below
   // lets us avoid bundling the actual posts themselves in the bundle for the
   // index page.
-  return json([articleFromModule(reactDomJsx)]);
+  return json(getAllArticles());
 }
 
 function Article({
