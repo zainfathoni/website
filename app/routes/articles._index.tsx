@@ -1,5 +1,5 @@
 import { json, MetaFunction } from "@remix-run/deno";
-import { useLoaderData } from "@remix-run/react";
+import { Outlet, useLoaderData } from "@remix-run/react";
 import { Card } from "app/components/Card";
 import { SimpleLayout } from "app/components/SimpleLayout";
 import { formatDate } from "app/lib/format-date";

@@ -29,3 +29,8 @@ export const getAllArticles = () => {
   const articles = [reactDomJsx];
   return articles.map(articleFromModule);
 };
+
+export const getArticleBySlug = (slug?: string) => {
+  const articles = getAllArticles();
+  return articles.find((article) => article.slug === slug);
+};
