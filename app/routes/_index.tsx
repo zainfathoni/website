@@ -24,6 +24,7 @@ import { formatDate } from "app/utils/format-date";
 import { Card } from "app/components/Card";
 import { json } from "@remix-run/deno";
 import { useLoaderData } from "@remix-run/react";
+import type { ArticleAttributes } from "app/models/articles";
 import { getAllArticles } from "app/models/articles";
 
 function SocialLink({
@@ -92,23 +93,20 @@ export function loader() {
 }
 
 function Article({
-  article,
-}: {
   article: {
-    slug: string;
-    title: string;
-    author: string;
-    description: string;
-    date: string;
-  };
+    slug,
+    attributes: { meta },
+  },
+}: {
+  article: ArticleAttributes;
 }) {
   return (
     <Card as="article">
-      <Card.Title to={`/articles/${article.slug}`}>{article.title}</Card.Title>
-      <Card.Eyebrow as="time" dateTime={article.date} decorate>
-        {formatDate(article.date)}
+      <Card.Title to={`/articles/${slug}`}>{meta.title}</Card.Title>
+      <Card.Eyebrow as="time" dateTime={meta.date} decorate>
+        {formatDate(meta.date)}
       </Card.Eyebrow>
-      <Card.Description>{article.description}</Card.Description>
+      <Card.Description>{meta.description}</Card.Description>
       <Card.Cta>Read article</Card.Cta>
     </Card>
   );
