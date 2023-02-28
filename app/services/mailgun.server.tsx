@@ -23,10 +23,6 @@ export const subscribe = async (email: string) => {
   };
 
   const url = `https://api.mailgun.net/v3/lists/${MAILGUN_MAILING_LIST}/members`;
-  console.log({
-    authorization,
-    url,
-  });
   const response = await fetch(url, requestOptions);
 
   return response;
