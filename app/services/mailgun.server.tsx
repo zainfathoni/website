@@ -1,7 +1,12 @@
 import { load } from "https://deno.land/std@0.178.0/dotenv/mod.ts";
 
 export const subscribe = async (email: string) => {
-  const { MAILGUN_API_KEY, MAILGUN_MAILING_LIST } = await load();
+  const env = await load();
+
+  const MAILGUN_API_KEY =
+    Deno.env.get("MAILGUN_API_KEY") ?? env.MAILGUN_API_KEY;
+  const MAILGUN_MAILING_LIST =
+    Deno.env.get("MAILGUN_MAILING_LIST") ?? env.MAILGUN_MAILING_LIST;
 
   const formdata = new FormData();
   formdata.append("subscribed", "True");
