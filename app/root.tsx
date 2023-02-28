@@ -7,13 +7,16 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
-import * as React from "react";
-import styles from "./tailwind.css";
+import styles from "./tailwind.css" assert { type: "css" };
 import "focus-visible";
+import { metadata } from "./models/metadata";
+import { Header } from "./components/Header";
+import { Footer } from "./components/Footer";
 
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
-  title: "New Remix App",
+  title: metadata.title,
+  description: metadata.description,
   viewport: "width=device-width,initial-scale=1",
 });
 
@@ -63,7 +66,18 @@ export default function App() {
         <Links />
       </head>
       <body className="flex h-full flex-col bg-zinc-50 dark:bg-black">
-        <Outlet />
+        <div className="fixed inset-0 flex justify-center sm:px-8">
+          <div className="flex w-full max-w-7xl lg:px-8">
+            <div className="w-full bg-white ring-1 ring-zinc-100 dark:bg-zinc-900 dark:ring-zinc-300/20" />
+          </div>
+        </div>
+        <div className="relative">
+          <Header />
+          <main>
+            <Outlet />
+          </main>
+          <Footer />
+        </div>
         <ScrollRestoration />
         <Scripts />
         <LiveReload />

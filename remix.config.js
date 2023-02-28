@@ -10,6 +10,7 @@ module.exports = {
   future: {
     unstable_postcss: true,
     unstable_tailwind: true,
+    v2_routeConvention: true,
   },
   ignoredRouteFiles: ["**/.*"],
   server: "./server.ts",

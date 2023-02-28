@@ -1,6 +1,5 @@
 import type { EntryContext } from "@remix-run/deno";
 import { RemixServer } from "@remix-run/react";
-import * as React from "react";
 import { renderToString } from "react-dom/server";
 
 export default function handleRequest(

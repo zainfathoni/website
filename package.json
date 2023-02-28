@@ -10,7 +10,7 @@
     "format": "deno fmt --ignore=node_modules,build,public/build",
     "lint": "deno lint --ignore=node_modules,build,public/build",
     "start": "cross-env NODE_ENV=production deno run --unstable --allow-net --allow-read --allow-env ./build/index.js",
-    "typecheck": "deno check"
+    "typecheck": "deno check app/**/*.ts{,x}"
   },
   "dependencies": {
     "@headlessui/react": "1.7.11",
@@ -24,9 +24,11 @@
   "devDependencies": {
     "@remix-run/dev": "^1.13.0",
     "@tailwindcss/typography": "0.5.9",
+    "@types/react-dom": "18.0.11",
     "autoprefixer": "10.4.13",
     "cross-env": "^7.0.3",
     "npm-run-all": "^4.1.5",
+    "pkode": "1.5.1",
     "postcss-focus-visible": "8.0.2",
     "tailwindcss": "3.2.7"
   },

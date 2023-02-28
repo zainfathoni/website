@@ -1,12 +1,14 @@
 import { Popover, Transition } from "@headlessui/react";
 import clsx from "clsx";
 
-import avatarImage from "../images/avatar.jpg";
+import avatarImage from "../images/avatar.jpg" assert { type: "asset" };
 import React, { Fragment, useEffect, useRef } from "react";
-import { Link, NavLink } from "@remix-run/react";
+import { Link, NavLink, useMatches } from "@remix-run/react";
 import { Container, ContainerProps } from "./Container";
 
-function CloseIcon(props) {
+function CloseIcon(
+  props: JSX.IntrinsicAttributes & React.SVGProps<SVGSVGElement>,
+) {
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
       <path
@@ -21,7 +23,9 @@ function CloseIcon(props) {
   );
 }
 
-function ChevronDownIcon(props) {
+function ChevronDownIcon(
+  props: JSX.IntrinsicAttributes & React.SVGProps<SVGSVGElement>,
+) {
   return (
     <svg viewBox="0 0 8 6" aria-hidden="true" {...props}>
       <path
@@ -35,7 +39,9 @@ function ChevronDownIcon(props) {
   );
 }
 
-function SunIcon(props) {
+function SunIcon(
+  props: JSX.IntrinsicAttributes & React.SVGProps<SVGSVGElement>,
+) {
   return (
     <svg
       viewBox="0 0 24 24"
@@ -54,7 +60,9 @@ function SunIcon(props) {
   );
 }
 
-function MoonIcon(props) {
+function MoonIcon(
+  props: JSX.IntrinsicAttributes & React.SVGProps<SVGSVGElement>,
+) {
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true" {...props}>
       <path
@@ -83,7 +91,7 @@ function MobileNavItem({
   );
 }
 
-function MobileNavigation(props) {
+function MobileNavigation(props: JSX.IntrinsicAttributes & ContainerProps) {
   return (
     <Popover {...props}>
       <Popover.Button className="group flex items-center rounded-full bg-white/90 px-4 py-2 text-sm font-medium text-zinc-800 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:text-zinc-200 dark:ring-white/10 dark:hover:ring-white/20">
@@ -139,7 +147,13 @@ function MobileNavigation(props) {
   );
 }
 
-function NavItem({ href, children }) {
+function NavItem({
+  href,
+  children,
+}: {
+  href: string;
+  children: React.ReactNode;
+}) {
   return (
     <li>
       <NavLink
@@ -149,7 +163,7 @@ function NavItem({ href, children }) {
             "relative block px-3 py-2 transition",
             isActive
               ? "text-teal-500 dark:text-teal-400"
-              : "hover:text-teal-500 dark:hover:text-teal-400"
+              : "hover:text-teal-500 dark:hover:text-teal-400",
           )
         }
       >
@@ -166,7 +180,11 @@ function NavItem({ href, children }) {
   );
 }
 
-function DesktopNavigation(props) {
+function DesktopNavigation(
+  props: JSX.IntrinsicAttributes &
+    React.ClassAttributes<HTMLElement> &
+    React.HTMLAttributes<HTMLElement>,
+) {
   return (
     <nav {...props}>
       <ul className="flex rounded-full bg-white/90 px-3 text-sm font-medium text-zinc-800 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:text-zinc-200 dark:ring-white/10">
@@ -215,7 +233,7 @@ function ModeToggle() {
   );
 }
 
-function clamp(number, a, b) {
+function clamp(number: number, a: number, b: number) {
   const min = Math.min(a, b);
   const max = Math.max(a, b);
   return Math.min(Math.max(number, min), max);
@@ -226,7 +244,7 @@ function AvatarContainer({ className, ...props }: ContainerProps) {
     <div
       className={clsx(
         className,
-        "h-10 w-10 rounded-full bg-white/90 p-0.5 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:ring-white/10"
+        "h-10 w-10 rounded-full bg-white/90 p-0.5 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur dark:bg-zinc-800/90 dark:ring-white/10",
       )}
       {...props}
     />
@@ -251,7 +269,7 @@ function Avatar({
         sizes={large ? "4rem" : "2.25rem"}
         className={clsx(
           "rounded-full bg-zinc-100 object-cover dark:bg-zinc-800",
-          large ? "h-16 w-16" : "h-9 w-9"
+          large ? "h-16 w-16" : "h-9 w-9",
         )}
       />
     </Link>
@@ -259,7 +277,9 @@ function Avatar({
 }
 
 export function Header() {
-  const isHomePage = true; // TODO: use `useMatches` from react-router-dom
+  const matches = useMatches();
+
+  const isHomePage = matches[1].pathname === "/";
 
   const headerRef = useRef<HTMLDivElement>(null);
   const avatarRef = useRef<HTMLDivElement>(null);
@@ -269,11 +289,11 @@ export function Header() {
     const downDelay = avatarRef.current?.offsetTop ?? 0;
     const upDelay = 64;
 
-    function setProperty(property, value) {
+    function setProperty(property: string, value: string | null) {
       document.documentElement.style.setProperty(property, value);
     }
 
-    function removeProperty(property) {
+    function removeProperty(property: string) {
       document.documentElement.style.removeProperty(property);
     }
 
@@ -285,7 +305,7 @@ export function Header() {
       const scrollY = clamp(
         self.scrollY,
         0,
-        document.body.scrollHeight - self.innerHeight
+        document.body.scrollHeight - self.innerHeight,
       );
 
       if (isInitial.current) {
@@ -337,7 +357,7 @@ export function Header() {
 
       setProperty(
         "--avatar-image-transform",
-        `translate3d(${x}rem, 0, 0) scale(${scale})`
+        `translate3d(${x}rem, 0, 0) scale(${scale})`,
       );
 
       const borderScale = 1 / (toScale / scale);
@@ -345,7 +365,7 @@ export function Header() {
       const borderTransform = `translate3d(${borderX}rem, 0, 0) scale(${borderScale})`;
 
       setProperty("--avatar-border-transform", borderTransform);
-      setProperty("--avatar-border-opacity", scale === toScale ? 1 : 0);
+      setProperty("--avatar-border-opacity", scale === toScale ? "1" : "0");
     }
 
     function updateStyles() {
