@@ -1,5 +1,3 @@
-import { Container } from "./Container";
-
 export function SimpleLayout({
   title,
   intro,
@@ -7,7 +5,7 @@ export function SimpleLayout({
 }: {
   title: string;
   intro: string;
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }) {
   return (
     <>
