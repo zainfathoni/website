@@ -24,7 +24,7 @@ import { Button, ButtonLink } from "app/components/Button";
 import { formatDate } from "app/utils/format-date";
 import { Card } from "app/components/Card";
 import { ActionArgs, json, redirect } from "@remix-run/deno";
-import { Form, useLoaderData } from "@remix-run/react";
+import { Form, useActionData, useLoaderData } from "@remix-run/react";
 import type { ArticleAttributes } from "app/models/articles";
 import { getAllArticles } from "app/models/articles";
 import { subscribe } from "app/services/mailgun.server";
@@ -133,23 +133,25 @@ export const action = async ({ request }: ActionArgs) => {
   formdata.append("address", email);
 
   const response = await subscribe(email);
-  console.log(response);
 
+  // TODO: show a warning message for errors
   // if (response.status !== 200) {
   //   return { formError: "Something went wrong" };
   // }
 
   const data = await response.json();
-  console.log({ data });
 
-  if (data.message !== "Mailing list member has been created") {
+  if (
+    data.message !== `Address already exists '${email}'` &&
+    data.message !== "Mailing list member has been created"
+  ) {
     return json(data, { status: response.status });
   }
 
   return redirect("/thank-you");
 };
 
-function Newsletter() {
+function Newsletter({ email }: { email?: string }) {
   return (
     <Form
       method="post"
