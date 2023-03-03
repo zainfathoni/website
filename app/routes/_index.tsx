@@ -76,6 +76,8 @@ function Photos() {
             <img
               src={image}
               alt=""
+              height={288}
+              width={288}
               sizes="(min-width: 640px) 18rem, 11rem"
               className="absolute inset-0 h-full w-full object-cover"
             />

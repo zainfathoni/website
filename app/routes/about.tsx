@@ -70,6 +70,8 @@ export default function About() {
             <img
               src={portraitImage}
               alt=""
+              height={300}
+              width={300}
               sizes="(min-width: 1024px) 32rem, 20rem"
               className="aspect-square rotate-3 rounded-2xl bg-zinc-100 object-cover dark:bg-zinc-800"
             />
